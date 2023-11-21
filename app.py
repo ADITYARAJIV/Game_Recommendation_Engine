@@ -8,7 +8,7 @@ game = pd.DataFrame(games_dict)
 ft_vector = pickle.load(open('ft_vector.pkl', 'rb'))
 ft_model = pickle.load(open('ft_model.pkl', 'rb'))
 recommendations = []
-st.title("Movie Recommender System")
+st.title("Game Recommender System")
 
 selected_movie_name = st.selectbox(
     'How would you like to be contacted ?',
@@ -16,6 +16,8 @@ selected_movie_name = st.selectbox(
 
 if st.button('recommend'):
     recommendations = recommendation_system(game, ft_vector, ft_model)
-
-for i in recommendations:
-    st.write(i)
+    if len(recommendations) != 0:
+        for game_name in recommendations:
+            st.write(game_name)
+    else:
+        st.write("No games recommended")
