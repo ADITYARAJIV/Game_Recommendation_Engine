@@ -324,7 +324,6 @@ def recommendation_system(game, FT_vector, FT_model):
   except Exception as e:
     print(e)
 
-recommendation_system('Uncharted 4: A Thief\'s End')
 
 
 
