@@ -7,7 +7,7 @@ games_dict = pickle.load(open('games_dict.pkl', 'rb'))
 game = pd.DataFrame(games_dict)
 ft_vector = pickle.load(open('ft_vector.pkl', 'rb'))
 ft_model = pickle.load(open('ft_model.pkl', 'rb'))
-
+recommendations = []
 st.title("Movie Recommender System")
 
 selected_movie_name = st.selectbox(
