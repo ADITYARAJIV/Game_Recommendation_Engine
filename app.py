@@ -3,7 +3,7 @@ import streamlit as st
 import pandas as pd
 from game_recommender_engine import recommendation_system
 
-game_dict = pickle.load(open('game_dict.pkl', 'rb'))
+game_dict = pickle.load(open('games_dict.pkl', 'rb'))
 game = pd.DataFrame(movies_dict)
 ft_vector = pickle.load(open('ft_vector.pkl', 'rb'))
 ft_model = pickle.load(open('ft_model.pkl', 'rb'))
