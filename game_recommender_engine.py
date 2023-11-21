@@ -287,6 +287,7 @@ for item in corpus:
     FT_vector.append(FT_model.wv[str(item)])
 FT_vector = np.asarray(FT_vector)
 
+
 """
 from sklearn.metrics.pairwise import cosine_similarity
 similarity = cosine_similarity(FT_vector)
@@ -306,8 +307,24 @@ kmeanModel = KMeans(n_clusters=50, random_state=42).fit(FT_vector)
 cluster_id = kmeanModel.predict(FT_vector)
 dataset["cluster_id"] = cluster_id
 
-def recommendation_system(game, FT_vector, FT_model):
+def recommendation_system(game, dataset, FT_vector, FT_model):
   try:
+    '''
+    corpus = dataset['tags'].tolist()
+    sentences = [re.split(' ', str(sentence)) for sentence in corpus]
+    embedding_size = 30
+    FT_model = FT_gensim(vector_size=embedding_size, min_count=2, min_n=2, max_n=5, sg=1, negative=10,
+            sample=0.001, window=5, alpha=0.025, min_alpha=0.0001, epochs=50)
+    FT_model.build_vocab(sentences)
+    print('corpus_count: ', FT_model.corpus_count)
+    print('corpus_total_words: ', FT_model.corpus_total_words)
+    FT_model.train(sentences, epochs=FT_model.epochs, total_examples=FT_model.corpus_count, 
+            total_words=FT_model.corpus_total_words)
+    FT_vector = []
+    for item in corpus:
+        FT_vector.append(FT_model.wv[str(item)])
+    FT_vector = np.asarray(FT_vector)
+    '''
     top_k = 5
     title_row = dataset[dataset["Name"] == game].copy()
     #print(title_row)
@@ -323,12 +340,4 @@ def recommendation_system(game, FT_vector, FT_model):
     return search_df[["Name"]].head(top_k)
   except Exception as e:
     print(e)
-
-
-
-
-
-
-
-
 
