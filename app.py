@@ -17,6 +17,6 @@ selected_movie_name = st.selectbox(
 if st.button('recommend'):
     try:
         for game_name in recommendation_system(game, ft_vector, ft_model):
-            print(game_name)
+            st.write(game_name)
     except Exception as e:
         print(e)
