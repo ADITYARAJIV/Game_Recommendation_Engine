@@ -15,9 +15,8 @@ selected_movie_name = st.selectbox(
     game['Name'].values)
 
 if st.button('recommend'):
-    recommendations = recommendation_system(game, ft_vector, ft_model)
-    if len(recommendations) != 0:
-        for game_name in recommendations:
-            st.write(game_name)
-    else:
-        st.write("No games recommended")
+    try:
+        for game_name in recommendation_system(game, ft_vector, ft_model):
+            print(game_name)
+    except Exception as e:
+        print(e)
