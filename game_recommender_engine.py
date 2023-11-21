@@ -304,9 +304,11 @@ def recommend(game):
 from sklearn.cluster import KMeans
 from scipy.spatial.distance import cdist
 
+'''
 kmeanModel = KMeans(n_clusters=50, random_state=42).fit(FT_vector)
 cluster_id = kmeanModel.predict(FT_vector)
 dataset["cluster_id"] = cluster_id
+'''
 
 def recommendation_system(game, dataset):#, FT_vector, FT_model):
   try:
@@ -324,6 +326,9 @@ def recommendation_system(game, dataset):#, FT_vector, FT_model):
     for item in corpus:
         FT_vector.append(FT_model.wv[str(item)])
     FT_vector = np.asarray(FT_vector)
+    kmeanModel = KMeans(n_clusters=50, random_state=42).fit(FT_vector)
+    cluster_id = kmeanModel.predict(FT_vector)
+    dataset["cluster_id"] = cluster_id
     top_k = 5
     title_row = dataset[dataset["Name"] == game].copy()
     #print(title_row)
@@ -331,7 +336,6 @@ def recommendation_system(game, dataset):#, FT_vector, FT_model):
     #print(search_df)
     search_df = search_df.drop(search_df[search_df["Name"] == game].index)
     #print(search_df)
-
     search_df["Similarity"] = search_df.apply(lambda x: FT_model.wv.similarity(title_row["tags"], x["tags"]), axis=1)
     search_df["Similarity"] = search_df["Similarity"].apply(lambda x: np.mean(x))
     search_df.sort_values(by=["Similarity"], ascending=False, inplace=True)
