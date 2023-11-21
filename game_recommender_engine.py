@@ -267,6 +267,7 @@ vector.shape"""
 
 from gensim.models.fasttext import FastText as FT_gensim
 import re
+'''
 corpus = dataset['tags'].tolist()
 sentences = [re.split(' ', str(sentence)) for sentence in corpus]
 embedding_size = 30
@@ -286,7 +287,7 @@ FT_vector = []
 for item in corpus:
     FT_vector.append(FT_model.wv[str(item)])
 FT_vector = np.asarray(FT_vector)
-
+'''
 
 """
 from sklearn.metrics.pairwise import cosine_similarity
@@ -307,9 +308,8 @@ kmeanModel = KMeans(n_clusters=50, random_state=42).fit(FT_vector)
 cluster_id = kmeanModel.predict(FT_vector)
 dataset["cluster_id"] = cluster_id
 
-def recommendation_system(game, dataset, FT_vector, FT_model):
+def recommendation_system(game, dataset):#, FT_vector, FT_model):
   try:
-    '''
     corpus = dataset['tags'].tolist()
     sentences = [re.split(' ', str(sentence)) for sentence in corpus]
     embedding_size = 30
@@ -324,7 +324,6 @@ def recommendation_system(game, dataset, FT_vector, FT_model):
     for item in corpus:
         FT_vector.append(FT_model.wv[str(item)])
     FT_vector = np.asarray(FT_vector)
-    '''
     top_k = 5
     title_row = dataset[dataset["Name"] == game].copy()
     #print(title_row)
