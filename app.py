@@ -20,3 +20,4 @@ if st.button('recommend'):
             st.write(game_name)
     except Exception as e:
         print(e)
+        st.write('No recommendations')
