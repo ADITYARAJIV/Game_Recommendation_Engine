@@ -1,0 +1,7 @@
+sklearn
+streamlit
+gensim
+scipy
+pandas
+pickle
+nltk
